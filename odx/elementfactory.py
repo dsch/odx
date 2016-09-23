@@ -1,7 +1,11 @@
 from xml.etree import ElementTree as ET
 from collections import defaultdict
 
-from odx.element import *
+from odx.element import BaseVariant, CodedConst, PhysConst, \
+    DataObjectProperty, DiagDataDictionarySpec, DiagLayerContainer, \
+    DiagService, DtcDop, MinMaxLengthType, Request, StandardLengthType, \
+    State, StateChart, Unit, UnitSpec, StateTransition, Element, Structure, \
+    Value, Dop
 
 
 class Container:
@@ -138,7 +142,8 @@ class ElementFactory:
         if e.tag in self.CONTAINERS:
             return Container(self, e)
 
-        element_type = e.get('{http://www.w3.org/2001/XMLSchema-instance}type', default=e.tag)
+        element_type = e.get('{http://www.w3.org/2001/XMLSchema-instance}type',
+                             default=e.tag)
         if element_type in self.ELEMENTS:
             cls = self.ELEMENTS[element_type]
             assert not isinstance(cls, Element)
