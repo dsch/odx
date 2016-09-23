@@ -25,6 +25,9 @@ class Container:
     def __str__(self):
         return self.__name
 
+    def __len__(self):
+        return len(self.__data)
+
     def __iter__(self):
         for i in self.__data:
             yield i
